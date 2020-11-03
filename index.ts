@@ -1,5 +1,7 @@
-import { Custumer } from './Custumer';
+import { File } from './File';
+// import { Customer } from './Customer';
 
-let custumer = new Custumer('100');
+const file = new File('input.txt');
+const transactions = file.read();
 
-custumer.isInstantiaed();
+transactions.forEach(i => console.log(i))

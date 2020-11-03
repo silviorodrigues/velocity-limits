@@ -1,4 +1,4 @@
-export class Custumer {
+export class Customer {
   readonly id: string;
   
   public constructor(id: string) {
