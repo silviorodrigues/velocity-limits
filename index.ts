@@ -1,7 +1,6 @@
-import { File } from './File';
+import { Transaction } from './classes';
 // import { Customer } from './Customer';
 
-const file = new File('input.txt');
-const transactions = file.read();
+const transaction = new Transaction('input.txt');
 
-transactions.forEach(i => console.log(i))
+transaction.attempts.forEach(i => console.log(i.customer_id))
