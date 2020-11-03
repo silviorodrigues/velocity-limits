@@ -1,4 +1,4 @@
 export interface Customer {
   id: string;
-  isInstantiaed(): void;
+  sendAttempt(amount: string, time: string): void;
 }

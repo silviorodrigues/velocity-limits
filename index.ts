@@ -1,23 +1,27 @@
 import { Customer, Transaction } from './classes';
 import { Customer as CustomerInterface } from './interfaces/Customer';
+import { Attempt } from './interfaces/Attempt';
 
 const transactions = new Transaction('input.txt');
 const customers: CustomerInterface[] = [];
 
-const isCustomerLoaded = (customerId: string): boolean => {
-  return customers.some(({ id }) => id === customerId);
-}
+const getCustomer = (customerId: string): CustomerInterface => {
+  const loadedCustomer =  customers.find(({ id }) => id === customerId);
 
-const getLoadedCustomer = (customerId: string): CustomerInterface | undefined => {
-  return customers.find(({ id }) => id === customerId);
-}
-
-transactions.attempts.forEach(({ customer_id }) => {
-  if(isCustomerLoaded(customer_id)) {
-    getLoadedCustomer(customer_id)?.isInstantiaed()
+  if(loadedCustomer) {
+    return loadedCustomer;
   } else {
-    customers.push(new Customer(customer_id))
-  }
-});
+    const newCustomer = new Customer(customerId);
 
-console.log(customers)
+    customers.push(newCustomer);
+    return newCustomer;
+  }
+}
+
+const sendAttempt = ({ customer_id, load_amount, time }: Attempt): void => {
+  getCustomer(customer_id).sendAttempt(load_amount, time);
+}
+
+transactions.attempts.forEach((attempt) => {
+  sendAttempt(attempt);
+});
