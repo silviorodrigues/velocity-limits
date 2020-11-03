@@ -1,4 +1,6 @@
-export class Customer {
+import { Customer as CustomerInterface } from '../interfaces/Customer';
+
+export class Customer implements CustomerInterface {
   readonly id: string;
   
   public constructor(id: string) {
