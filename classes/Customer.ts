@@ -11,7 +11,7 @@ export class Customer implements CustomerInterface {
     this.id = id;
   }
 
-  public sendAttempt(amount: string, time: string) {
-    console.log(`Id: ${this.id} amount: ${amount} time: ${time}`);
+  public canAttempt(amount: number, time: string): boolean {
+    return true;
   }
 }

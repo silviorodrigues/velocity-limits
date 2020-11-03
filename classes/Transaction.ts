@@ -14,6 +14,13 @@ export class Transaction implements TransactionInterface {
   private read(): Attempt[] {
     const input = readFileSync(this.inputFile, 'utf-8');
 
-    return input.split('\n').filter(line => line).map(line => JSON.parse(line));
+    return input.split('\n').filter(line => line).map(line => {
+      const transaction = JSON.parse(line);
+
+      return {
+        ...transaction,
+        load_amount: parseFloat(transaction.load_amount.replace('$', ''))
+      };
+    });
   }
 }

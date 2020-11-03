@@ -1,4 +1,4 @@
 export interface Customer {
   id: string;
-  sendAttempt(amount: string, time: string): void;
+  canAttempt(amount: number, time: string): boolean;
 }
