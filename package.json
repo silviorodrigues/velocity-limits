@@ -5,6 +5,7 @@
   "license": "ISC",
   "main": "index.ts",
   "devDependencies": {
+    "@types/luxon": "^1.25.0",
     "@types/node": "^14.14.6",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
@@ -12,5 +13,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "test": "test"
+  },
+  "dependencies": {
+    "luxon": "^1.25.0"
   }
 }

@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
 import { Transaction as TransactionInterface } from '../interfaces/Transaction';
 
@@ -19,7 +20,8 @@ export class Transaction implements TransactionInterface {
 
       return {
         ...transaction,
-        load_amount: parseFloat(transaction.load_amount.replace('$', ''))
+        load_amount: parseFloat(transaction.load_amount.replace('$', '')),
+        time: DateTime.fromISO(transaction.time)
       };
     });
   }

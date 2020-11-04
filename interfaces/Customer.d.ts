@@ -1,4 +1,6 @@
+import { Attempt } from './Attempt';
+
 export interface Customer {
   id: string;
-  canAttempt(amount: number, time: string): boolean;
+  canAttempt(Attempt): boolean;
 }

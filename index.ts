@@ -18,8 +18,10 @@ const getCustomer = (customerId: string): CustomerInterface => {
   }
 }
 
-const sendAttempt = ({ customer_id, load_amount, time }: Attempt): void => {
-  const attemptResult = getCustomer(customer_id).canAttempt(load_amount, time);
+const sendAttempt = (attempt: Attempt): void => {
+  const attemptResult = getCustomer(attempt.customer_id).canAttempt(attempt);
+
+  console.log(attemptResult);
 }
 
 transactions.attempts.forEach((attempt) => {
