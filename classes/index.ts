@@ -1,2 +1,2 @@
-export { Transaction } from './Transaction';
+export { IO } from './IO';
 export { Customer } from './Customer';

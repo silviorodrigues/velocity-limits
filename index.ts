@@ -1,8 +1,8 @@
-import { Customer, Transaction } from './classes';
+import { Customer, IO } from './classes';
 import { Customer as CustomerInterface } from './interfaces/Customer';
 import { Attempt } from './interfaces/Attempt';
 
-const transactions = new Transaction('input.txt');
+const io = new IO('input.txt');
 const customers: CustomerInterface[] = [];
 
 const getCustomer = (customerId: string): CustomerInterface => {
@@ -21,9 +21,9 @@ const getCustomer = (customerId: string): CustomerInterface => {
 const sendAttempt = (attempt: Attempt): void => {
   const attemptResult = getCustomer(attempt.customer_id).canAttempt(attempt);
 
-  transactions.write(attempt, attemptResult);
+  io.write(attempt, attemptResult);
 }
 
-transactions.attempts.forEach((attempt) => {
+io.attempts.forEach((attempt) => {
   sendAttempt(attempt);
 });

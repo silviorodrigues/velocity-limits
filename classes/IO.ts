@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
 import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
-import { Transaction as TransactionInterface } from '../interfaces/Transaction';
+import { IO as IOInterface } from '../interfaces/IO';
 
-export class Transaction implements TransactionInterface {
+export class IO implements IOInterface {
   readonly inputFile: string;
   readonly attempts: Attempt[];
   
@@ -17,17 +17,17 @@ export class Transaction implements TransactionInterface {
   }
 
   private read(): Attempt[] {
-    return this.formatTransactions(readFileSync(this.inputFile, 'utf-8'));
+    return this.formatInput(readFileSync(this.inputFile, 'utf-8'));
   }
 
-  private formatTransactions(input: string): Attempt[] {
+  private formatInput(input: string): Attempt[] {
     return input.split('\n').filter(line => line).map(line => {
-      const transaction = JSON.parse(line);
+      const attempts = JSON.parse(line);
 
       return {
-        ...transaction,
-        load_amount: parseFloat(transaction.load_amount.replace('$', '')),
-        time: DateTime.fromISO(transaction.time, { setZone: true })
+        ...attempts,
+        load_amount: parseFloat(attempts.load_amount.replace('$', '')),
+        time: DateTime.fromISO(attempts.time, { setZone: true })
       };
     });
   }
