@@ -1,11 +1,11 @@
 import { Customer, IO } from './classes';
-import { Customer as CustomerInterface } from './interfaces/Customer';
+import { CustomerClass } from './interfaces/Customer';
 import { Attempt } from './interfaces/Attempt';
 
 const io = new IO('input.txt');
-const customers: CustomerInterface[] = [];
+const customers: CustomerClass[] = [];
 
-const getCustomer = (customerId: string): CustomerInterface => {
+const getCustomer = (customerId: string): CustomerClass => {
   const loadedCustomer =  customers.find(({ id }) => id === customerId);
 
   if(loadedCustomer) {

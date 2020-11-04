@@ -1,11 +1,11 @@
 import { Attempt } from '../interfaces/Attempt';
-import { Customer as CustomerInterface } from '../interfaces/Customer';
+import { CustomerClass } from '../interfaces/Customer';
 
 const MAX_DAILY_LOADS = 3;
 const MAX_DAILY_AMOUNT = 5000;
 const MAX_WEEKLY_AMOUNT = 20000;
 
-export class Customer implements CustomerInterface {
+export class Customer implements CustomerClass {
   readonly id: string;
   private attempts: Attempt[] = [];
   

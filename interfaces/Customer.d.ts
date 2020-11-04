@@ -1,6 +1,6 @@
 import { Attempt } from './Attempt';
 
-export interface Customer {
+export interface CustomerClass {
   id: string;
   canAttempt(Attempt): boolean;
 }

@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
 import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
-import { IO as IOInterface } from '../interfaces/IO';
+import { IOClass } from '../interfaces/IO';
 
-export class IO implements IOInterface {
+export class IO implements IOClass {
   readonly inputFile: string;
   readonly attempts: Attempt[];
   
