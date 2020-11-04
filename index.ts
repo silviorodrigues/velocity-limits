@@ -21,7 +21,7 @@ const getCustomer = (customerId: string): CustomerInterface => {
 const sendAttempt = (attempt: Attempt): void => {
   const attemptResult = getCustomer(attempt.customer_id).canAttempt(attempt);
 
-  console.log(attemptResult);
+  transactions.write(attempt, attemptResult);
 }
 
 transactions.attempts.forEach((attempt) => {

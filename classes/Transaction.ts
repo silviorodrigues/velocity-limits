@@ -12,6 +12,10 @@ export class Transaction implements TransactionInterface {
     this.attempts = this.read();
   }
 
+  public write({id, customer_id}: Attempt, accepted: boolean): void {
+    console.log({id, customer_id, accepted});
+  }
+
   private read(): Attempt[] {
     const input = readFileSync(this.inputFile, 'utf-8');
 
@@ -21,7 +25,7 @@ export class Transaction implements TransactionInterface {
       return {
         ...transaction,
         load_amount: parseFloat(transaction.load_amount.replace('$', '')),
-        time: DateTime.fromISO(transaction.time)
+        time: DateTime.fromISO(transaction.time, { setZone: true })
       };
     });
   }
