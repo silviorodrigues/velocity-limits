@@ -19,9 +19,9 @@ const getCustomer = (customerId: string): CustomerClass => {
 }
 
 const sendAttempt = (attempt: Attempt): void => {
-  const attemptResult = getCustomer(attempt.customer_id).canAttempt(attempt);
+  const attemptAccepted = getCustomer(attempt.customer_id).canAttempt(attempt);
 
-  io.write(attempt, attemptResult);
+  io.write(attempt, attemptAccepted);
 }
 
 io.attempts.forEach((attempt) => {
