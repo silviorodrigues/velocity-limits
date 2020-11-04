@@ -17,8 +17,10 @@ export class Transaction implements TransactionInterface {
   }
 
   private read(): Attempt[] {
-    const input = readFileSync(this.inputFile, 'utf-8');
+    return this.formatTransactions(readFileSync(this.inputFile, 'utf-8'));
+  }
 
+  private formatTransactions(input: string): Attempt[] {
     return input.split('\n').filter(line => line).map(line => {
       const transaction = JSON.parse(line);
 
