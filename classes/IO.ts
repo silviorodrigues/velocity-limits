@@ -1,19 +1,32 @@
 import { readFileSync } from 'fs';
 import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
-import { IOClass } from '../interfaces/IO';
+import { IOClass, Output } from '../interfaces/IO';
 
 export class IO implements IOClass {
   readonly inputFile: string;
-  readonly attempts: Attempt[];
+  readonly input: Attempt[];
+  private output: Output[] = [];
+  private loadedAttempts: Attempt[] = []
   
   public constructor(inputFile: string) {
     this.inputFile = inputFile;
-    this.attempts = this.read();
+    this.input = this.read();
   }
 
-  public write({id, customer_id}: Attempt, accepted: boolean): void {
-    console.log({id, customer_id, accepted});
+  public log(attempt: Attempt, accepted: boolean): void {
+    const log = {
+      id: attempt.id,
+      customer_id: attempt.customer_id,
+      accepted};
+
+    this.loadedAttempts.push(attempt);
+    this.output.push(log);
+    console.log(log);
+  }
+
+  public hasLoaded({ id, customer_id }: Attempt): boolean {
+    return this.loadedAttempts.some(attempt => attempt.id === id && attempt.customer_id === customer_id);
   }
 
   private read(): Attempt[] {

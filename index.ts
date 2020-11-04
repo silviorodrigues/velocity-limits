@@ -21,9 +21,9 @@ const getCustomer = (customerId: string): CustomerClass => {
 const sendAttempt = (attempt: Attempt): void => {
   const attemptAccepted = getCustomer(attempt.customer_id).canAttempt(attempt);
 
-  io.write(attempt, attemptAccepted);
+  io.log(attempt, attemptAccepted);
 }
 
-io.attempts.forEach((attempt) => {
-  sendAttempt(attempt);
+io.input.forEach((attempt) => {
+  !io.hasLoaded(attempt) && sendAttempt(attempt);
 });
