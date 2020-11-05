@@ -1,2 +1,2 @@
-export { IO } from './IO';
-export { Customer } from './Customer';
+export { default as IO } from './IO';
+export { default as Customer } from './Customer';

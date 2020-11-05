@@ -6,26 +6,28 @@ const io = new IO('input.txt');
 const customers: CustomerClass[] = [];
 
 const getCustomer = (customerId: string): CustomerClass => {
-  const loadedCustomer =  customers.find(({ id }) => id === customerId);
+  const loadedCustomer = customers.find(({ id }) => id === customerId);
 
-  if(loadedCustomer) {
+  if (loadedCustomer) {
     return loadedCustomer;
-  } else {
-    const newCustomer = new Customer(customerId);
-
-    customers.push(newCustomer);
-    return newCustomer;
   }
-}
+
+  const newCustomer = new Customer(customerId);
+
+  customers.push(newCustomer);
+  return newCustomer;
+};
 
 const sendAttempt = (attempt: Attempt): void => {
   const attemptAccepted = getCustomer(attempt.customer_id).canAttempt(attempt);
 
   io.log(attempt, attemptAccepted);
-}
+};
 
-io.input.forEach((attempt) => {
-  !io.hasLoaded(attempt) && sendAttempt(attempt);
+io.input.forEach((attempt: Attempt): void => {
+  if (!io.hasLoaded(attempt)) {
+    sendAttempt(attempt);
+  }
 });
 
 io.write('output.txt');

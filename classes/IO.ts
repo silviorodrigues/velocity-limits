@@ -1,14 +1,17 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
-import { IOClass, Output } from '../interfaces/IO';
+import { IOClass } from '../interfaces/IO';
 
-export class IO implements IOClass {
+export default class IO implements IOClass {
   readonly inputFile: string;
+
   readonly input: Attempt[];
+
   private output: string = '';
+
   private loadedAttempts: Attempt[] = []
-  
+
   public constructor(inputFile: string) {
     this.inputFile = inputFile;
     this.input = this.read();
@@ -18,7 +21,8 @@ export class IO implements IOClass {
     const log = {
       id: attempt.id,
       customer_id: attempt.customer_id,
-      accepted};
+      accepted,
+    };
 
     this.loadedAttempts.push(attempt);
     this.output = this.output.concat(`${JSON.stringify(log)}\n`);
@@ -30,7 +34,7 @@ export class IO implements IOClass {
   }
 
   public hasLoaded({ id, customer_id }: Attempt): boolean {
-    return this.loadedAttempts.some(attempt => attempt.id === id && attempt.customer_id === customer_id);
+    return this.loadedAttempts.some((att) => att.id === id && att.customer_id === customer_id);
   }
 
   private read(): Attempt[] {
@@ -38,13 +42,13 @@ export class IO implements IOClass {
   }
 
   private formatInput(input: string): Attempt[] {
-    return input.split('\n').filter(line => line).map(line => {
+    return input.split('\n').filter((line) => line).map((line) => {
       const attempts = JSON.parse(line);
 
       return {
         ...attempts,
         load_amount: parseFloat(attempts.load_amount.replace('$', '')),
-        time: DateTime.fromISO(attempts.time, { setZone: true })
+        time: DateTime.fromISO(attempts.time, { setZone: true }),
       };
     });
   }

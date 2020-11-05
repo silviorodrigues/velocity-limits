@@ -7,9 +7,3 @@ export interface IOClass {
   hasLoaded(attempt: Attempt): boolean;
   write(outputFile: string): void;
 }
-
-export type Output = {
-  id: string;
-  customer_id: string;
-  accepted: boolean;
-}

@@ -15,6 +15,11 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    "camelcase": "off",
+    "class-methods-use-this": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "no-console": "off",
   },
   ignorePatterns: ['*.d.ts']
 };
