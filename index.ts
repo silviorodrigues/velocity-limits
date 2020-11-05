@@ -27,3 +27,5 @@ const sendAttempt = (attempt: Attempt): void => {
 io.input.forEach((attempt) => {
   !io.hasLoaded(attempt) && sendAttempt(attempt);
 });
+
+io.write('output.txt');

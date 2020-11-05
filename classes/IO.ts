@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { DateTime } from 'luxon';
 import { Attempt } from '../interfaces/Attempt';
 import { IOClass, Output } from '../interfaces/IO';
@@ -6,7 +6,7 @@ import { IOClass, Output } from '../interfaces/IO';
 export class IO implements IOClass {
   readonly inputFile: string;
   readonly input: Attempt[];
-  private output: Output[] = [];
+  private output: string = '';
   private loadedAttempts: Attempt[] = []
   
   public constructor(inputFile: string) {
@@ -21,8 +21,12 @@ export class IO implements IOClass {
       accepted};
 
     this.loadedAttempts.push(attempt);
-    this.output.push(log);
+    this.output = this.output.concat(`${JSON.stringify(log)}\n`);
     console.log(log);
+  }
+
+  public write(outputFile: string): void {
+    writeFileSync(outputFile, this.output, 'utf-8');
   }
 
   public hasLoaded({ id, customer_id }: Attempt): boolean {

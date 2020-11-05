@@ -5,6 +5,7 @@ export interface IOClass {
   input: Attempt[];
   log(attempt: Attempt, accepted: boolean): void;
   hasLoaded(attempt: Attempt): boolean;
+  write(outputFile: string): void;
 }
 
 export type Output = {
